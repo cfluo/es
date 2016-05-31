@@ -1,0 +1,40 @@
+截止到2015-06-07月为止，http://zhangkaitao.github.io/es/上下载的代码按照步骤进行编译后，会有下面问题产生：
+
+”按照你文档来操作,初始化数据库等都ok,但是到执行es-web的时候,起动不了.请问是怎么回事呢?
+
+mvn clean tomcat7:run -Dmaven.test.skip=true
+
+最后最后一只卡在这里...
+
+信息: Initializing spring root WebApplicationContext
+十一月 30, 2014 10:20:15 下午 com.alibaba.druid.pool.DruidDataSource info
+信息: {dataSource-1} inited
+hibernate: select taskdefini0_.id as id1_4_, taskdefini0_.bean_class as bean_cla2_4_, taskdefini0_.b
+ ean_name as bean_nam3_4_, taskdefini0_.cron as cron4_4_, taskdefini0_.description as descript5_4_, t
+ askdefini0_.method_name as method_n6_4_, taskdefini0_.name as name7_4_, taskdefini0_.is_start as is_
+ start8_4_ from maintain_task_definition taskdefini0_ where 1=1“
+
+问题原因：
+
+1.JDK配置问题
+
+2.Spring版本问题
+
+修改方法：
+
+关于ES脚手架框架升级到JDK 7.0以及Spring配置问题
+
+es-parent/pom.xml
+修改成
+<spring.version>4.0.1.RELEASE</spring.version>
+
+
+ es/codegen/pom.xml
+ <jdk.version>1.7</jdk.version>
+
+
+ es/parent/pom.xml
+
+<jdk.version>1.7</jdk.version>
+
+使用maven重新编译即可
